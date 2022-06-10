@@ -60,6 +60,13 @@ int		ft_check_duplicate(int value, t_construct *construct);
 /* Gestion des piles ft_stack_manager.c */
 void	ft_free_stack(t_stack *stack);
 void	ft_free_construct(t_construct *construct);
-void	ft_print_stack(t_stack *stack);
+void	ft_stack_print(t_stack *stack);
+int		ft_stack_size(t_stack *stack);
+t_stack	*ft_stack_last(t_stack *stack);
+/* Operations sur les piles ft_stack_ope.c */
+void	ft_swap(t_stack *stack);
+void	ft_push(t_stack **st_from, t_stack **st_to);
+void	ft_rotate(t_stack **stack);
+void	ft_rrotate(t_stack **stack);
 
 #endif

@@ -49,7 +49,29 @@ void	ft_free_construct(t_construct *construct)
 	free(construct);
 }
 
-void	ft_print_stack(t_stack *stack)
+int	ft_stack_size(t_stack *stack)
+{
+	int size;
+	
+	size = 0;
+	while (stack)
+	{
+		stack = stack->next;
+		size++;
+	}
+	return (size);
+}
+
+t_stack	*ft_stack_last(t_stack *stack)
+{
+	if (!stack)
+		return (NULL);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
+}
+
+void	ft_stack_print(t_stack *stack)
 {
 	if (!stack)
 		return ;

@@ -37,6 +37,7 @@ int	main(int argc, char *argv[])
 	}
 	else
 		ft_build_stack(argc, argv, construct);
-	ft_print_stack(construct->a);
+	ft_stack_print(construct->a);
+	ft_stack_print(construct->b);
 	ft_free_construct(construct);
 }

@@ -22,7 +22,8 @@ LIBFT_PATH = libft/
 LIBINC_PATH = libft/includes/
 
 SRCS_PATH		= srcs/
-SRCS_FUNCTIONS	= main ft_build_stack ft_check_data ft_stack_manager
+SRCS_FUNCTIONS	= main ft_build_stack ft_check_data ft_stack_manager \
+ft_stack_ope
 SRCS = $(addprefix $(SRCS_PATH), $(addsuffix .c, $(SRCS_FUNCTIONS)))
 
 OBJS = $(SRCS:.c=.o)
