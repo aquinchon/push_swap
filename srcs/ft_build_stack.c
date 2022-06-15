@@ -12,20 +12,18 @@
 
 #include "push_swap.h"
 
-static t_stack	*ft_stackpush(t_construct *construct, int content)
+static t_stack	*ft_stackpush_a(t_construct *construct, int content)
 {
-	t_stack *new;
+	t_stack	*new;
 	t_stack	*tmp;
-	
+
 	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (construct->a);
 	new->data = content;
 	new->next = NULL;
 	if (!construct->a)
-	{
 		return (new);
-	}
 	else
 	{
 		tmp = construct->a;
@@ -51,7 +49,7 @@ void	ft_build_stack(int argc, char **argv, t_construct *construct)
 			while (ft_isspace(argv[arg][i]))
 				i++;
 			value = ft_check_data(argv[arg] + i, construct);
-			construct->a = ft_stackpush(construct, value);
+			construct->a = ft_stackpush_a(construct, value);
 			while (ft_isdigit(argv[arg][i])
 				|| argv[arg][i] == '-' || argv[arg][i] == '+')
 				i++;

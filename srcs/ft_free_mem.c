@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_free_mem.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aquincho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 13:54:23 by aquincho          #+#    #+#             */
-/*   Updated: 2022/05/04 13:54:27 by aquincho           ###   ########.fr     */
+/*   Created: 2022/06/10 11:42:58 by aquincho          #+#    #+#             */
+/*   Updated: 2022/06/10 11:44:03 by aquincho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_atoi(const char *nptr)
+void	ft_free_stack(t_stack *stack)
 {
-	int	i;
-	int	signe;
-	int	resultat;
+	t_stack	*tmp;
 
-	resultat = 0;
-	signe = 1;
-	i = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	if (!stack)
+		return ;
+	while (stack)
 	{
-		if (nptr[i] == '-')
-			signe *= -1;
-		i++;
+		tmp = stack;
+		stack = stack->next;
+		free(tmp);
 	}
-	while (nptr[i] && (nptr[i] >= '0' && nptr[i] <= '9'))
-	{
-		resultat = resultat * 10 + (nptr[i] - '0');
-		i++;
-	}
-	return (resultat * signe);
+}
+
+void	ft_free_construct(t_construct *construct)
+{
+	if (construct->a)
+		ft_free_stack(construct->a);
+	if (construct->b)
+		ft_free_stack(construct->b);
+	if (construct->ope)
+		ft_free_stack(construct->ope);
+	free(construct);
 }

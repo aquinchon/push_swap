@@ -24,7 +24,7 @@ int	ft_check_duplicate(int value, t_construct *construct)
 	t_stack	*tmp;
 
 	tmp = construct->a;
-	while(tmp != NULL)
+	while (tmp != NULL)
 	{
 		if (tmp->data == value)
 		{
@@ -38,12 +38,25 @@ int	ft_check_duplicate(int value, t_construct *construct)
 	return (0);
 }
 
+static int	ft_check_int(char c, int resultat, int signe,
+	t_construct *construct)
+{
+	if ((signe == 1 && resultat <= (INT_MAX - (c - '0')) / 10)
+		|| (signe == -1 && resultat * signe >= (INT_MIN + (c - '0')) / 10))
+		return (1);
+	else
+	{
+		write(2, "Error\n", 6);
+		ft_free_construct(construct);
+		exit (2);
+	}
+}
+
 static int	ft_check_atoi(const char *nptr, t_construct *construct)
 {
-	int	i;
-	int	signe;
-	int	resultat;
-	int	checkint;
+	int				i;
+	int				signe;
+	unsigned int	resultat;
 
 	resultat = 0;
 	signe = 1;
@@ -58,14 +71,8 @@ static int	ft_check_atoi(const char *nptr, t_construct *construct)
 	}
 	while (nptr[i] && (nptr[i] >= '0' && nptr[i] <= '9'))
 	{
-		checkint = resultat;
-		resultat = resultat * 10 + (nptr[i] - '0');
-		if ((checkint != (resultat - (nptr[i] - '0')) / 10) || resultat < 0)
-		{
-			write(2, "Error\n", 6);
-			ft_free_construct(construct);
-			exit (2);
-		}
+		if (ft_check_int(nptr[i], resultat, signe, construct))
+			resultat = resultat * 10 + (nptr[i] - '0');
 		i++;
 	}
 	return (resultat * signe);
@@ -73,7 +80,7 @@ static int	ft_check_atoi(const char *nptr, t_construct *construct)
 
 int	ft_check_data(char *s, t_construct *construct)
 {
-	int i;
+	int	i;
 	int	value;
 
 	i = 0;
@@ -84,7 +91,6 @@ int	ft_check_data(char *s, t_construct *construct)
 		else
 		{
 			write(2, "Error\n", 6);
-			//ft_free_stack(construct->a);
 			ft_free_construct(construct);
 			exit (1);
 		}

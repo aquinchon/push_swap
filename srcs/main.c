@@ -28,7 +28,7 @@ static t_construct	*ft_init_construct(void)
 int	main(int argc, char *argv[])
 {
 	t_construct	*construct;
-	
+
 	construct = ft_init_construct();
 	if (argc < 2)
 	{
@@ -37,7 +37,15 @@ int	main(int argc, char *argv[])
 	}
 	else
 		ft_build_stack(argc, argv, construct);
-	ft_stack_print(construct->a);
-	ft_stack_print(construct->b);
+	if (ft_stack_size(construct->a) > 1)
+		ft_sort(construct);
+	/*ft_printf("a: %d\n", ft_stack_size(construct->a));
+	ft_print_stack(construct->a);
+	ft_printf("b: %d\n", ft_stack_size(construct->b));
+	ft_print_stack(construct->b);
+	ft_printf("Sorted a: %d b: %d\n", ft_stack_sorted(construct->a),
+		ft_stack_sorted(construct->b));
+	ft_printf("nb ope: %d\n", ft_stack_size(construct->ope));*/
+	ft_print_ope(construct->ope);
 	ft_free_construct(construct);
 }
