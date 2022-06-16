@@ -10,13 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= push_swap
+NAME	= push_swap
+NAME_C	= checker
 
-INCLUDE			= includes/
-CC				= gcc
-CFLAGS			= -Wall -Werror -Wextra -g
-RM				= rm -f
-AR				= ar rcs
+INCLUDE	= includes/
+CC		= gcc
+CFLAGS	= -Wall -Werror -Wextra -g
+RM		= rm -f
+AR		= ar rcs
 
 LIBFT_PATH = libft/
 LIBINC_PATH = libft/includes/
@@ -24,10 +25,15 @@ LIBINC_PATH = libft/includes/
 SRCS_PATH		= srcs/
 SRCS_FUNCTIONS	= main ft_build_stack ft_check_data ft_stack_manager \
 ft_stack_ope ft_print_stack ft_free_mem \
-ft_sort_utils ft_sort_basic ft_sort_small
+ft_sort_utils ft_sort ft_sort_small ft_sort_radix ft_sort_median
 SRCS = $(addprefix $(SRCS_PATH), $(addsuffix .c, $(SRCS_FUNCTIONS)))
 
+SRCS_C_PATH			= srcs/checker
+SRCS_C_FUNCTIONS	= checker
+SRCS_C = $(addprefix $(SRCS_C_PATH), $(addsuffix .c, $(SRCS_C_FUNCTIONS)))
+
 OBJS = $(SRCS:.c=.o)
+OBJS_C = $(SRCS_C:.c=.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(INCLUDE) -I $(LIBINC_PATH) -c $< -o $@

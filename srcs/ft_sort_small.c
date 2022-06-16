@@ -12,32 +12,40 @@
 
 #include "push_swap.h"
 
-void	ft_sort_5elemts(t_construct *construct)
+static void	ft_build_b(t_construct *construct, int median, int nb_push)
 {
-	int	**array_a;
-	int	size;
-	int	median;
-
-	if (ft_stack_sorted(construct->a))
-		return ;
-	size = ft_stack_size(construct->a);
-	array_a = ft_build_array(construct->a);
-	median = ft_find_median(array_a, size);
-	while (ft_stack_size(construct->b) < 2)
+	while (nb_push > 0)
 	{
 		if (construct->a->data < median)
+		{
 			ft_push(&construct->a, &construct->b, &construct->ope, pb);
+			nb_push--;
+		}
 		else
 			ft_rotate(&construct->a, &construct->ope, ra);
 	}
+}
+
+void	ft_sort_5elemts(t_construct *construct)
+{
+	int	median;
+	int	i_push;
+
+	if (ft_stack_size(construct->a) <= 3)
+		ft_sort_3elemts(construct);
+	if (ft_stack_sorted(construct->a))
+		return ;
+	median = ft_find_median(construct->a);
+	ft_build_b(construct, median, 2);
 	ft_sort_3elemts(construct);
 	if (construct->b->data < construct->b->next->data)
 		ft_swap(construct->b, &construct->ope, sb);
-	while (ft_stack_size(construct->b) > 0)
+	i_push = 2;
+	while (i_push > 0)
+	{
 		ft_push(&construct->b, &construct->a, &construct->ope, pa);
-	free (array_a[0]);
-	free (array_a[1]);
-	free (array_a);
+		i_push--;
+	}
 }
 
 void	ft_sort_3elemts(t_construct *construct)

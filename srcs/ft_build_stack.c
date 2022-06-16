@@ -46,8 +46,10 @@ void	ft_build_stack(int argc, char **argv, t_construct *construct)
 		i = 0;
 		while (argv[arg][i] != '\0')
 		{
-			while (ft_isspace(argv[arg][i]))
+			while (ft_isspace(argv[arg][i]) && argv[arg][i])
 				i++;
+			if (!argv[arg][i])
+				return ;
 			value = ft_check_data(argv[arg] + i, construct);
 			construct->a = ft_stackpush_a(construct, value);
 			while (ft_isdigit(argv[arg][i])

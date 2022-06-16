@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap"
+#include "checker.h"
 
-int	main(int argc, char *argv[])
-{
-
-}
+int	main(int argc, char *argv[]);

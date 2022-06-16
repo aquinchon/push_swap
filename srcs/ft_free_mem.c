@@ -36,3 +36,13 @@ void	ft_free_construct(t_construct *construct)
 		ft_free_stack(construct->ope);
 	free(construct);
 }
+
+void	ft_free_array(int **array)
+{
+	if (array[0])
+		free(array[0]);
+	if (array[1])
+		free(array[1]);
+	if (array)
+		free(array);
+}

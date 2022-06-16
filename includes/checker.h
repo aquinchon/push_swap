@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack_manager.c                                 :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aquincho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 13:37:07 by aquincho          #+#    #+#             */
-/*   Updated: 2022/06/07 13:37:10 by aquincho         ###   ########.fr       */
+/*   Created: 2022/06/16 11:17:22 by aquincho          #+#    #+#             */
+/*   Updated: 2022/06/16 11:17:40 by aquincho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef CHECKER_H
+# define CHECKER_H
 
-int	ft_stack_size(t_stack *stack)
-{
-	int	size;
+# include "push_swap.h"
 
-	size = 0;
-	while (stack)
-	{
-		stack = stack->next;
-		size++;
-	}
-	return (size);
-}
-
-t_stack	*ft_stack_last(t_stack *stack)
-{
-	if (!stack)
-		return (NULL);
-	while (stack->next)
-		stack = stack->next;
-	return (stack);
-}
+#endif

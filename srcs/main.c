@@ -39,7 +39,7 @@ int	main(int argc, char *argv[])
 		ft_build_stack(argc, argv, construct);
 	if (ft_stack_size(construct->a) > 1)
 		ft_sort(construct);
-	/*ft_printf("a: %d\n", ft_stack_size(construct->a));
+/*	ft_printf("a: %d\n", ft_stack_size(construct->a));
 	ft_print_stack(construct->a);
 	ft_printf("b: %d\n", ft_stack_size(construct->b));
 	ft_print_stack(construct->b);

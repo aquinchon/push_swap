@@ -13,14 +13,16 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/includes/libft.h"
-# include "../libft/includes/ft_printf.h"
+/*# include "../libft/includes/libft.h"*/
+# include "libft.h"
+/*# include "../libft/includes/ft_printf.h"*/
 # include <stdlib.h>
 # include <limits.h>
 
 typedef struct s_stack
 {
 	int				data;
+	int				key;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -58,24 +60,28 @@ int		ft_check_duplicate(int value, t_construct *construct);
 /* Gestion des piles ft_stack_manager.c */
 int		ft_stack_size(t_stack *stack);
 t_stack	*ft_stack_last(t_stack *stack);
-int		ft_stack_sorted(t_stack *stack);
 /* Gestion de la memoire utilisee par les piles ft_free_mem.c */
 void	ft_free_stack(t_stack *stack);
 void	ft_free_construct(t_construct *construct);
+void	ft_free_array(int **array);
 /* Operations sur les piles ft_stack_ope.c */
 void	ft_swap(t_stack *stack, t_stack **ope, t_numope n_ope);
 void	ft_push(t_stack **from, t_stack **to, t_stack **ope, t_numope n_ope);
 void	ft_rotate(t_stack **stack, t_stack **ope, t_numope n_ope);
 void	ft_rrotate(t_stack **stack, t_stack **ope, t_numope n_ope);
-/* Tri simple ft_sort_basic.c */
+/* Tri naif ft_sort.c */
 void	ft_sort(t_construct *construct);
 void	ft_sort_basic(t_construct *construct);
+void	ft_sort_median(t_construct *construct);
+void	ft_sort_radix(t_construct *construct);
 /* Tri 3 a 5 elements ft_small_sort.c */
 void	ft_sort_3elemts(t_construct *construct);
 void	ft_sort_5elemts(t_construct *construct);
 /* fonctions pour le tri ft_sort_utils.c */
+int		ft_stack_sorted(t_stack *stack);
 int		**ft_build_array(t_stack *stack);
-int		ft_find_median(int **array, int size);
+int		**ft_sort_array(t_stack *stack);
+int		ft_find_median(t_stack *stack);
 /* print stack ou operations ft_print_stack.c */
 void	ft_print_stack(t_stack *stack);
 void	ft_write_ope(t_stack **stack, t_numope num_ope);
