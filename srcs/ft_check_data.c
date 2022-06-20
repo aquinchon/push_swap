@@ -14,7 +14,7 @@
 
 int	ft_isspace(char c)
 {
-	if (c == ' ' || (c >= 9 && c <= 13))
+	if (c == ' ' || (c == 9 || c == 11))
 		return (1);
 	return (0);
 }
@@ -29,7 +29,7 @@ int	ft_check_duplicate(int value, t_construct *construct)
 		if (tmp->data == value)
 		{
 			write(2, "Error\n", 6);
-			ft_free_construct(construct);
+			ft_free_construct(construct, 0);
 			exit (1);
 		}
 		tmp = tmp->next;
@@ -47,7 +47,7 @@ static int	ft_check_int(char c, int resultat, int signe,
 	else
 	{
 		write(2, "Error\n", 6);
-		ft_free_construct(construct);
+		ft_free_construct(construct, 0);
 		exit (2);
 	}
 }
@@ -91,7 +91,7 @@ int	ft_check_data(char *s, t_construct *construct)
 		else
 		{
 			write(2, "Error\n", 6);
-			ft_free_construct(construct);
+			ft_free_construct(construct, 0);
 			exit (1);
 		}
 	}

@@ -39,10 +39,10 @@ static char	*rtrim(const char *s, size_t len, const char *set)
 		return (NULL);
 	while (i < len)
 	{
-		*(dst + i) = *(s + i);
+		dst[i] = s[i];
 		i++;
 	}
-	*(dst + i) = '\0';
+	dst[i] = '\0';
 	return (dst);
 }
 

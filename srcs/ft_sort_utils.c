@@ -12,19 +12,6 @@
 
 #include "push_swap.h"
 
-int	ft_stack_sorted(t_stack *stack)
-{
-	if (!stack || !stack->next)
-		return (2);
-	while (stack->next)
-	{
-		if (stack->data > stack->next->data)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
 int	ft_find_median(t_stack *stack)
 {
 	int	i;

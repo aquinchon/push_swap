@@ -16,45 +16,61 @@ PRINTF_PATH = ./ft_printf/
 PRINTF_FUNCTIONS = ft_printf ft_process_conv ft_printutils ft_printxnbr \
 ft_printchar ft_printnbr ft_printptr ft_printunbr
 
+GNL_PATH = ./get_next_line/
+GNL_FUNCTIONS = get_next_line
+
 SRCS = $(addprefix $(SRCS_PATH), $(addsuffix .c, $(SRCS_FUNCTIONS)))
 BONUS_SRCS = $(addprefix $(BONUS_PATH), $(addsuffix .c, $(BONUS_FUNCTIONS)))
 PRINTF_SRCS = $(addprefix $(PRINTF_PATH), $(addsuffix .c, $(PRINTF_FUNCTIONS)))
+GNL_SRCS = $(addprefix $(GNL_PATH), $(addsuffix .c, $(GNL_FUNCTIONS)))
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 PRINTF_OBJS = $(PRINTF_SRCS:.c=.o)
+GNL_OBJS = $(GNL_SRCS:.c=.o)
 
 HEAD_PATH = ./includes/
 
 RM = rm -f
-
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
+AR = ar cr
 
 .c.o:
 	$(CC) $(CFLAGS) -c -I $(HEAD_PATH) $< -o $(<:.c=.o)
 
 $(NAME): $(OBJS)
-	ar cr $(NAME) $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 	ranlib $(NAME)
+	@echo "\033[33;32m=== compilation libft \t\t\t\tDONE\e[0m"
 
 bonus: $(BONUS_OBJS)
-	ar cr $(NAME) $(BONUS_OBJS)
+	$(AR) $(NAME) $(BONUS_OBJS)
 	ranlib $(NAME)
+	@echo "\033[33;32m=== compilation libft lists \t\t\t\tDONE\e[0m"
 
 printf: $(PRINTF_OBJS)
-	ar cr $(NAME) $(PRINTF_OBJS)
+	$(AR) $(NAME) $(PRINTF_OBJS)
 	ranlib $(NAME)
+	@echo "\033[33;32m=== compilation libft printf \t\t\t\tDONE\e[0m"
 
-all:	$(NAME) bonus printf
+gnl: $(GNL_OBJS)
+	$(AR) $(NAME) $(GNL_OBJS)
+	ranlib $(NAME)
+	@echo "\033[33;32m=== compilation libft get_next_line \t\t\tDONE\e[0m"
+
+all:	$(NAME) bonus printf gnl
 
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(BONUS_OBJS)
 	$(RM) $(PRINTF_OBJS)
+	$(RM) $(GNL_OBJS)
+	@echo "\033[33;32m=== delete compil files libft \t\t\tDONE\e[0m"
 
 fclean:	clean
 	$(RM) $(NAME)
+	@echo "\033[33;32m=== delete name files libft \t\t\tDONE\e[0m"
 
 re: fclean all
 

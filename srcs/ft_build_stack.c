@@ -34,6 +34,20 @@ static t_stack	*ft_stackpush_a(t_construct *construct, int content)
 	return (construct->a);
 }
 
+static void	ft_check_empty_arg(char *arg, t_construct *construct)
+{
+	int	i;
+
+	while (ft_isspace(arg[i]) && arg[i])
+		i++;
+	if (!arg[i])
+	{
+		write(2, "Error\n", 6);
+		ft_free_construct(construct, 0);
+		exit(1);
+	}
+}
+
 void	ft_build_stack(int argc, char **argv, t_construct *construct)
 {
 	int	i;
@@ -44,17 +58,19 @@ void	ft_build_stack(int argc, char **argv, t_construct *construct)
 	while (arg < argc)
 	{
 		i = 0;
+		ft_check_empty_arg(argv[arg], construct);
 		while (argv[arg][i] != '\0')
 		{
 			while (ft_isspace(argv[arg][i]) && argv[arg][i])
 				i++;
-			if (!argv[arg][i])
-				return ;
-			value = ft_check_data(argv[arg] + i, construct);
-			construct->a = ft_stackpush_a(construct, value);
-			while (ft_isdigit(argv[arg][i])
-				|| argv[arg][i] == '-' || argv[arg][i] == '+')
-				i++;
+			if (argv[arg][i])
+			{
+				value = ft_check_data(argv[arg] + i, construct);
+				construct->a = ft_stackpush_a(construct, value);
+				while (ft_isdigit(argv[arg][i])
+					|| argv[arg][i] == '-' || argv[arg][i] == '+')
+					i++;
+			}
 		}
 		arg++;
 	}

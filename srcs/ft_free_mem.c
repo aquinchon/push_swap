@@ -26,14 +26,31 @@ void	ft_free_stack(t_stack *stack)
 	}
 }
 
-void	ft_free_construct(t_construct *construct)
+void	ft_free_ope(t_ope *ope, int check)
+{
+	t_ope	*tmp;
+
+	if (!ope)
+		return ;
+	while (ope)
+	{
+		tmp = ope;
+		if (check)
+			free(ope->data);
+		ope = ope->next;
+		free(tmp);
+	}
+	free(ope);
+}
+
+void	ft_free_construct(t_construct *construct, int check)
 {
 	if (construct->a)
 		ft_free_stack(construct->a);
 	if (construct->b)
 		ft_free_stack(construct->b);
 	if (construct->ope)
-		ft_free_stack(construct->ope);
+		ft_free_ope(construct->ope, check);
 	free(construct);
 }
 

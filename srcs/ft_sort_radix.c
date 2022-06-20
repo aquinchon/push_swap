@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static void	ft_fill_keys(t_construct *construct)
 {
@@ -30,12 +29,38 @@ static void	ft_fill_keys(t_construct *construct)
 		tmp->key = array[1][i];
 		tmp = tmp->next;
 	}
+	ft_free_array(array);
+}
+
+static void	ft_sort_bit(t_construct *construct, int shift, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (((construct->a->key >> shift) & 1) == 0)
+		{
+			ft_push(&construct->a, &construct->b);
+			ft_write_ope(&construct->ope, "pb");
+		}
+		else
+		{
+			ft_rotate(&construct->a);
+			ft_write_ope(&construct->ope, "ra");
+		}
+		i++;
+	}
+	while (construct->b)
+	{
+		ft_push(&construct->b, &construct->a);
+		ft_write_ope(&construct->ope, "pa");
+	}
 }
 
 void	ft_sort_radix(t_construct *construct)
 {
 	int	shift;
-	int	i;
 	int	size;
 
 	ft_fill_keys(construct);
@@ -43,17 +68,7 @@ void	ft_sort_radix(t_construct *construct)
 	shift = 0;
 	while (!ft_stack_sorted(construct->a))
 	{
-		i = 0;
-		while (i < size)
-		{
-			if (((construct->a->key >> shift) & 1) == 0)
-				ft_push(&construct->a, &construct->b, &construct->ope, pb);
-			else
-				ft_rotate(&construct->a, &construct->ope, ra);
-			i++;
-		}
-		while (construct->b)
-			ft_push(&construct->b, &construct->a, &construct->ope, pa);
+		ft_sort_bit(construct, shift, size);
 		shift++;
 	}
 }

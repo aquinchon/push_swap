@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aquincho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 11:17:22 by aquincho          #+#    #+#             */
-/*   Updated: 2022/06/16 11:17:40 by aquincho         ###   ########.fr       */
+/*   Created: 2022/05/19 10:25:49 by aquincho          #+#    #+#             */
+/*   Updated: 2022/05/19 10:25:56 by aquincho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include "libft.h"
 # include <stdlib.h>
+# include <unistd.h>
+# include <stdint.h>
 # include <limits.h>
-# include "push_swap.h"
+# include "libft.h"
 
-/* Construction de la pile d'operations checker.c*/
-void	ft_build_ope(t_construct *construct);
-/* Verification des operations de tri ft_check_pushswap.c */
-int		ft_check_pushswap(t_construct *construct);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+# define FD_MAX 1024
+
+/* Fonctions get_next_line*/
+char	*get_next_line(int fd);
+char	*ft_read(int fd, char *buffer);
+char	*ft_cutline(char *buffer);
+char	*ft_cpybuffer(char *buffer, char *buf_read);
+char	*ft_resize_buffer(char *buffer);
 
 #endif
